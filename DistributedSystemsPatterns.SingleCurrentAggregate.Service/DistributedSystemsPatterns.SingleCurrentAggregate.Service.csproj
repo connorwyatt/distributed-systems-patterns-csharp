@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="MediatR" Version="10.0.1" />
+        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\DistributedSystemsPatterns.UniqueConstraints.Mongo\DistributedSystemsPatterns.UniqueConstraints.Mongo.csproj" />
+        <ProjectReference Include="..\DistributedSystemsPatterns.Shared.EventStore.Subscriptions.MongoDB\DistributedSystemsPatterns.Shared.EventStore.Subscriptions.MongoDB.csproj" />
+        <ProjectReference Include="..\DistributedSystemsPatterns.Shared.EventStore\DistributedSystemsPatterns.Shared.EventStore.csproj" />
+    </ItemGroup>
+
+</Project>

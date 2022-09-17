@@ -24,6 +24,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{945214CD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedSystemsPatterns.UniqueConstraints.IntegrationTests", "DistributedSystemsPatterns.UniqueConstraints.IntegrationTests\DistributedSystemsPatterns.UniqueConstraints.IntegrationTests.csproj", "{73F085A1-0E69-4D53-99CE-A1EBB6E8878C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SingleCurrentAggregate", "SingleCurrentAggregate", "{ACCB8B5E-F287-4DF1-A904-B9CA23C907AE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{CC040133-4E33-43E1-8883-9424B8617AD6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{A839D7D5-B27D-4285-AF98-09755B7743AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedSystemsPatterns.SingleCurrentAggregate.Service", "DistributedSystemsPatterns.SingleCurrentAggregate.Service\DistributedSystemsPatterns.SingleCurrentAggregate.Service.csproj", "{C8D7218F-D8D5-4286-8480-C3A480E56F61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedSystemsPatterns.SingleCurrentAggregate.Mongo", "DistributedSystemsPatterns.SingleCurrentAggregate.Mongo\DistributedSystemsPatterns.SingleCurrentAggregate.Mongo.csproj", "{CD586439-DB91-432D-BB81-FB36A3E29FB5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +68,14 @@ Global
 		{73F085A1-0E69-4D53-99CE-A1EBB6E8878C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73F085A1-0E69-4D53-99CE-A1EBB6E8878C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73F085A1-0E69-4D53-99CE-A1EBB6E8878C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8D7218F-D8D5-4286-8480-C3A480E56F61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8D7218F-D8D5-4286-8480-C3A480E56F61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8D7218F-D8D5-4286-8480-C3A480E56F61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8D7218F-D8D5-4286-8480-C3A480E56F61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD586439-DB91-432D-BB81-FB36A3E29FB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD586439-DB91-432D-BB81-FB36A3E29FB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD586439-DB91-432D-BB81-FB36A3E29FB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD586439-DB91-432D-BB81-FB36A3E29FB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{00133E71-88B5-4E1C-AFD0-2F8C2C7FA1EF} = {85C3B804-2C90-455F-90F6-31E16BD215B7}
@@ -70,5 +88,10 @@ Global
 		{B39F3E5E-C6C8-4E11-8638-DAA9714F3DA9} = {624905D0-11AC-42C2-B176-8CB5789BD39E}
 		{945214CD-64F9-4EF9-B5E7-5AC85A9A5AC6} = {5A76C44E-E9CA-46A1-B2AE-FAD0D92FDAE4}
 		{73F085A1-0E69-4D53-99CE-A1EBB6E8878C} = {945214CD-64F9-4EF9-B5E7-5AC85A9A5AC6}
+		{ACCB8B5E-F287-4DF1-A904-B9CA23C907AE} = {04C50F1B-5079-4286-9C40-8BFACBB69C53}
+		{CC040133-4E33-43E1-8883-9424B8617AD6} = {ACCB8B5E-F287-4DF1-A904-B9CA23C907AE}
+		{A839D7D5-B27D-4285-AF98-09755B7743AF} = {ACCB8B5E-F287-4DF1-A904-B9CA23C907AE}
+		{C8D7218F-D8D5-4286-8480-C3A480E56F61} = {CC040133-4E33-43E1-8883-9424B8617AD6}
+		{CD586439-DB91-432D-BB81-FB36A3E29FB5} = {CC040133-4E33-43E1-8883-9424B8617AD6}
 	EndGlobalSection
 EndGlobal
