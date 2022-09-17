@@ -34,6 +34,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedSystemsPatterns.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedSystemsPatterns.SingleCurrentAggregate.Mongo", "DistributedSystemsPatterns.SingleCurrentAggregate.Mongo\DistributedSystemsPatterns.SingleCurrentAggregate.Mongo.csproj", "{CD586439-DB91-432D-BB81-FB36A3E29FB5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedSystemsPatterns.Shared.Ids", "DistributedSystemsPatterns.Shared.Ids\DistributedSystemsPatterns.Shared.Ids.csproj", "{49648E61-4C69-4176-B0DF-60A9B14BD7D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,10 @@ Global
 		{CD586439-DB91-432D-BB81-FB36A3E29FB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD586439-DB91-432D-BB81-FB36A3E29FB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD586439-DB91-432D-BB81-FB36A3E29FB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49648E61-4C69-4176-B0DF-60A9B14BD7D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49648E61-4C69-4176-B0DF-60A9B14BD7D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49648E61-4C69-4176-B0DF-60A9B14BD7D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49648E61-4C69-4176-B0DF-60A9B14BD7D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{00133E71-88B5-4E1C-AFD0-2F8C2C7FA1EF} = {85C3B804-2C90-455F-90F6-31E16BD215B7}
@@ -93,5 +99,6 @@ Global
 		{A839D7D5-B27D-4285-AF98-09755B7743AF} = {ACCB8B5E-F287-4DF1-A904-B9CA23C907AE}
 		{C8D7218F-D8D5-4286-8480-C3A480E56F61} = {CC040133-4E33-43E1-8883-9424B8617AD6}
 		{CD586439-DB91-432D-BB81-FB36A3E29FB5} = {CC040133-4E33-43E1-8883-9424B8617AD6}
+		{49648E61-4C69-4176-B0DF-60A9B14BD7D1} = {85C3B804-2C90-455F-90F6-31E16BD215B7}
 	EndGlobalSection
 EndGlobal

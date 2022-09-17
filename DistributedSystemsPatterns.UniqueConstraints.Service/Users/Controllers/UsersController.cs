@@ -1,4 +1,5 @@
 using DistributedSystemsPatterns.Mongo;
+using DistributedSystemsPatterns.Shared.Ids;
 using DistributedSystemsPatterns.UniqueConstraints.Service.Users.Commands;
 using DistributedSystemsPatterns.UniqueConstraints.Service.Users.Models;
 using MediatR;
@@ -46,7 +47,7 @@ public class UsersController : ControllerBase
   [Route("")]
   public async Task<IActionResult> AddUser([FromBody] UserDefinition userDefinition)
   {
-    var id = Guid.NewGuid().ToString();
+    var id = HashId.NewHashId();
 
     await _mediator.Send(new AddUser(id, userDefinition.Name, userDefinition.EmailAddress));
 

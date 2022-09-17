@@ -1,4 +1,5 @@
 using System.Net.Http.Json;
+using DistributedSystemsPatterns.Shared.Ids;
 using DistributedSystemsPatterns.Shared.Serialization;
 using DistributedSystemsPatterns.UniqueConstraints.Service;
 using DistributedSystemsPatterns.UniqueConstraints.Service.Users.Models;
@@ -26,7 +27,10 @@ public class UsersTests : IClassFixture<WebApplicationFactory<Startup>>
   {
     var testStartTime = SystemClock.Instance.GetCurrentInstant();
 
-    var userDefinition = new UserDefinition("Joe Bloggs", "joe@example.com");
+    const string name = "Joe Bloggs";
+    var emailAddress = $"joe+{HashId.NewHashId()}@example.com";
+
+    var userDefinition = new UserDefinition(name, emailAddress);
 
     var userId = await AddUser(userDefinition);
 
@@ -38,8 +42,8 @@ public class UsersTests : IClassFixture<WebApplicationFactory<Startup>>
     {
       user.UserId.Should().Be(userId);
       user.Status.Should().Be(UserStatus.Active);
-      user.Name.Should().Be("Joe Bloggs");
-      user.EmailAddress.Should().Be("joe@example.com");
+      user.Name.Should().Be(name);
+      user.EmailAddress.Should().Be(emailAddress);
       user.JoinedAt.Should().BeInRange(testStartTime, testEndTime);
     }
   }
@@ -47,7 +51,7 @@ public class UsersTests : IClassFixture<WebApplicationFactory<Startup>>
   [Fact]
   public async Task Given_A_User__When_Adding_A_User_With_The_Same_EmailAddress__Then_It_Should_Be_Deactivated()
   {
-    var userDefinition = new UserDefinition("Joe Bloggs", $"joe+{Guid.NewGuid()}@example.com");
+    var userDefinition = new UserDefinition("Joe Bloggs", $"joe+{HashId.NewHashId()}@example.com");
 
     var firstUserId = await AddUser(userDefinition);
     var secondUserId = await AddUser(userDefinition);
