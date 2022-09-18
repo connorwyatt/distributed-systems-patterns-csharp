@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DistributedSystemsPatterns.Mongo;
+namespace DistributedSystemsPatterns.UniqueConstraints.Mongo;
 
 public static class DependencyInjectionExtensions
 {

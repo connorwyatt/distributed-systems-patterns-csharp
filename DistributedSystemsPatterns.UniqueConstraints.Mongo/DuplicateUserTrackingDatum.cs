@@ -1,6 +1,6 @@
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace DistributedSystemsPatterns.Mongo;
+namespace DistributedSystemsPatterns.UniqueConstraints.Mongo;
 
 public record DuplicateUserTrackingDatum(
   [property: BsonId]

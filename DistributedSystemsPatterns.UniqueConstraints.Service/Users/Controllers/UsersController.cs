@@ -1,5 +1,5 @@
-using DistributedSystemsPatterns.Mongo;
 using DistributedSystemsPatterns.Shared.Ids;
+using DistributedSystemsPatterns.UniqueConstraints.Mongo;
 using DistributedSystemsPatterns.UniqueConstraints.Service.Users.Commands;
 using DistributedSystemsPatterns.UniqueConstraints.Service.Users.Models;
 using MediatR;

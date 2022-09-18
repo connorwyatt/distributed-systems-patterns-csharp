@@ -1,6 +1,6 @@
-using DistributedSystemsPatterns.Mongo;
 using DistributedSystemsPatterns.Shared.EventStore;
 using DistributedSystemsPatterns.Shared.EventStore.Subscriptions;
+using DistributedSystemsPatterns.UniqueConstraints.Mongo;
 using DistributedSystemsPatterns.UniqueConstraints.Service.Users.Commands;
 using DistributedSystemsPatterns.UniqueConstraints.Service.Users.Events;
 using MediatR;

@@ -1,6 +1,6 @@
 using MongoDB.Driver;
 
-namespace DistributedSystemsPatterns.Mongo;
+namespace DistributedSystemsPatterns.UniqueConstraints.Mongo;
 
 public class MongoUsersRepository
 {

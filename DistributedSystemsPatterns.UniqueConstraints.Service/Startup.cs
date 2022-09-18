@@ -1,9 +1,9 @@
 using System.Reflection;
-using DistributedSystemsPatterns.Mongo;
 using DistributedSystemsPatterns.Shared.EventStore;
 using DistributedSystemsPatterns.Shared.EventStore.Subscriptions;
 using DistributedSystemsPatterns.Shared.EventStore.Subscriptions.MongoDB;
 using DistributedSystemsPatterns.Shared.MongoDB;
+using DistributedSystemsPatterns.UniqueConstraints.Mongo;
 using DistributedSystemsPatterns.UniqueConstraints.Service.Users.ProcessManagers;
 using DistributedSystemsPatterns.UniqueConstraints.Service.Users.Projections;
 using MediatR;

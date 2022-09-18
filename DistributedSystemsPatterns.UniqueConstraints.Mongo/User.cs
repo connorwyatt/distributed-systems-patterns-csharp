@@ -2,7 +2,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using NodaTime;
 
-namespace DistributedSystemsPatterns.Mongo;
+namespace DistributedSystemsPatterns.UniqueConstraints.Mongo;
 
 public record User(
   [property: BsonId]

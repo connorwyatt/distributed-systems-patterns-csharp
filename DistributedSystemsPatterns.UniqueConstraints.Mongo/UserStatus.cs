@@ -1,4 +1,4 @@
-namespace DistributedSystemsPatterns.Mongo;
+namespace DistributedSystemsPatterns.UniqueConstraints.Mongo;
 
 public enum UserStatus
 {
