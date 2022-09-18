@@ -16,7 +16,7 @@ public abstract class Aggregate
 
   public void ReplayEvent(EventEnvelope<IEvent> eventEnvelope)
   {
-    Apply(eventEnvelope.Event);
+    ApplyEvent(eventEnvelope.Event);
     SavedEvents = SavedEvents.Add(eventEnvelope);
   }
 
@@ -35,11 +35,11 @@ public abstract class Aggregate
 
   protected void RaiseEvent(IEvent @event)
   {
-    Apply(@event);
+    ApplyEvent(@event);
     UnsavedEvents = UnsavedEvents.Add(@event);
   }
 
-  private void Apply(IEvent @event)
+  private void ApplyEvent(IEvent @event)
   {
     var eventType = @event.GetType();
     if (!_handlers.TryGetValue(eventType, out var handler))

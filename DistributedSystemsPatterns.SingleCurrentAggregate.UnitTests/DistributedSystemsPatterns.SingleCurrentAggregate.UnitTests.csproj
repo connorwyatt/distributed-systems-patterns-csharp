@@ -10,15 +10,14 @@
 
     <ItemGroup>
         <PackageReference Include="FluentAssertions" Version="6.7.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.9" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
-        <PackageReference Include="NodaTime" Version="3.1.2" />
-        <PackageReference Include="Polly" Version="7.2.3" />
         <PackageReference Include="xunit" Version="2.4.1" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\DistributedSystemsPatterns.UniqueConstraints.Service\DistributedSystemsPatterns.UniqueConstraints.Service.csproj" />
+      <ProjectReference Include="..\DistributedSystemsPatterns.Shared.Ids\DistributedSystemsPatterns.Shared.Ids.csproj" />
+      <ProjectReference Include="..\DistributedSystemsPatterns.Shared.TestUtils\DistributedSystemsPatterns.Shared.TestUtils.csproj" />
+      <ProjectReference Include="..\DistributedSystemsPatterns.SingleCurrentAggregate.Service\DistributedSystemsPatterns.SingleCurrentAggregate.Service.csproj" />
     </ItemGroup>
 
 </Project>
