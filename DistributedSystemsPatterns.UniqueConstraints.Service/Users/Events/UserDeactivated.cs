@@ -2,7 +2,7 @@ using DistributedSystemsPatterns.Shared.EventStore;
 
 namespace DistributedSystemsPatterns.UniqueConstraints.Service.Users.Events;
 
-[Event("distributedSystemsPatterns.uniqueConstraints.userDeactivated.v1")]
+[Event("DistributedSystemsPatterns.UniqueConstraints.UserDeactivated.V1")]
 public class UserDeactivated : IEvent
 {
   public string UserId { get; }

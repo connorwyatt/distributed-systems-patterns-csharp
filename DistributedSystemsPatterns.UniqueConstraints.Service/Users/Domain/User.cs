@@ -3,7 +3,7 @@ using DistributedSystemsPatterns.UniqueConstraints.Service.Users.Events;
 
 namespace DistributedSystemsPatterns.UniqueConstraints.Service.Users.Domain;
 
-[Category("users")]
+[Category("uniqueconstraints.users")]
 public class User : Aggregate
 {
   private bool _added;

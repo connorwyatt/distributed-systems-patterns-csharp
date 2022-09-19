@@ -2,7 +2,7 @@ using DistributedSystemsPatterns.Shared.EventStore;
 
 namespace DistributedSystemsPatterns.UniqueConstraints.Service.Users.Events;
 
-[Event("distributedSystemsPatterns.uniqueConstraints.userAdded.v1")]
+[Event("DistributedSystemsPatterns.UniqueConstraints.UserAdded.V1")]
 public class UserAdded : IEvent
 {
   public string UserId { get; }

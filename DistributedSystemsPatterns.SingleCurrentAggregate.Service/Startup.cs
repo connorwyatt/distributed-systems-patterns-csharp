@@ -1,7 +1,11 @@
 using System.Reflection;
 using DistributedSystemsPatterns.Shared.EventStore;
+using DistributedSystemsPatterns.Shared.EventStore.Subscriptions;
 using DistributedSystemsPatterns.Shared.EventStore.Subscriptions.MongoDB;
 using DistributedSystemsPatterns.Shared.MongoDB;
+using DistributedSystemsPatterns.SingleCurrentAggregate.Data.Mongo;
+using DistributedSystemsPatterns.SingleCurrentAggregate.Service.BillingPeriods.ProcessManagers;
+using DistributedSystemsPatterns.SingleCurrentAggregate.Service.BillingPeriods.Projections;
 using MediatR;
 using NodaTime;
 using NodaTime.Serialization.SystemTextJson;
@@ -36,6 +40,13 @@ public class Startup
         mongoDBConfiguration.GetValue<string>("SubscriptionCursorsCollectionName"));
 
     services.AddMongoDB(mongoDBOptions);
+
+    services
+      .AddMongoRepositories()
+      .AddSubscriber<BillingPeriodsProjection>()
+      .AddSubscriber<ChargesProjection>()
+      .AddSubscriber<UserCurrentBillingPeriodsProjection>()
+      .AddSubscriber<NewBillingPeriodOpenerProcessManager>();
   }
 
   public void Configure(WebApplication app)

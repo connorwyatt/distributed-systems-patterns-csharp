@@ -8,7 +8,7 @@ using MediatR;
 namespace DistributedSystemsPatterns.UniqueConstraints.Service.Users.ProcessManagers;
 
 [SubscriberName("DuplicateUsersProcessManager")]
-[Subscription("$ce-users")]
+[Subscription("$ce-uniqueconstraints.users")]
 public class DuplicateUsersProcessManager : SubscriberBase
 {
   private readonly IMediator _mediator;

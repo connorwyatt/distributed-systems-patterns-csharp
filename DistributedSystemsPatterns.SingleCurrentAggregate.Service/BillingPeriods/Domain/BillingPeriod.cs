@@ -4,45 +4,47 @@ using DistributedSystemsPatterns.SingleCurrentAggregate.Service.BillingPeriods.E
 
 namespace DistributedSystemsPatterns.SingleCurrentAggregate.Service.BillingPeriods.Domain;
 
-[Category("billingperiods")]
+[Category("singlecurrentaggregate.billingperiods")]
 public class BillingPeriod : Aggregate
 {
   private bool _started;
-  private bool _ended;
+  private bool _closed;
+
+  private string? _userId;
 
   private readonly Charges _charges = new();
 
   public BillingPeriod()
   {
-    When<BillingPeriodStarted>(Apply);
-    When<BillingPeriodEnded>(Apply);
+    When<BillingPeriodOpened>(Apply);
+    When<BillingPeriodClosed>(Apply);
     When<ChargeAdded>(Apply);
     When<ChargeRemoved>(Apply);
   }
 
-  public void StartBillingPeriod(string userId)
+  public void OpenBillingPeriod(string userId)
   {
     if (_started)
     {
-      throw new BillingPeriodAlreadyStartedException();
+      throw new BillingPeriodAlreadyOpenedException();
     }
 
-    if (_ended)
+    if (_closed)
     {
-      throw new BillingPeriodEndedException();
+      throw new BillingPeriodClosedException();
     }
 
-    RaiseEvent(new BillingPeriodStarted(Id, userId));
+    RaiseEvent(new BillingPeriodOpened(Id, userId));
   }
 
-  public void EndBillingPeriod()
+  public void CloseBillingPeriod()
   {
-    if (_ended)
+    if (_closed)
     {
-      throw new BillingPeriodAlreadyEndedException();
+      throw new BillingPeriodAlreadyClosedException();
     }
 
-    RaiseEvent(new BillingPeriodEnded(Id));
+    RaiseEvent(new BillingPeriodClosed(Id, GetUserIdOrThrow(), _charges.TotalAmount()));
   }
 
   public void AddCharge(string chargeId, double amount)
@@ -53,7 +55,7 @@ public class BillingPeriod : Aggregate
 
     var totalAmount = _charges.TotalAmount() + amount;
 
-    RaiseEvent(new ChargeAdded(Id, chargeId, amount, totalAmount));
+    RaiseEvent(new ChargeAdded(Id, GetUserIdOrThrow(), chargeId, amount, totalAmount));
   }
 
   public void RemoveCharge(string chargeId)
@@ -64,25 +66,28 @@ public class BillingPeriod : Aggregate
 
     var totalAmount = _charges.TotalAmount() - _charges.GetChargeAmount(chargeId);
 
-    RaiseEvent(new ChargeRemoved(Id, chargeId, totalAmount));
+    RaiseEvent(new ChargeRemoved(Id, GetUserIdOrThrow(), chargeId, totalAmount));
   }
 
   private void AssertBillingPeriodOpen()
   {
-    if (!_started || _ended)
+    if (!_started || _closed)
     {
       throw new BillingPeriodNotOpenException();
     }
   }
 
-  private void Apply(BillingPeriodStarted @event)
+  private string GetUserIdOrThrow() => _userId ?? throw new InvalidOperationException("UserId is null.");
+
+  private void Apply(BillingPeriodOpened @event)
   {
     _started = true;
+    _userId = @event.UserId;
   }
 
-  private void Apply(BillingPeriodEnded @event)
+  private void Apply(BillingPeriodClosed @event)
   {
-    _ended = true;
+    _closed = true;
   }
 
   private void Apply(ChargeAdded @event)

@@ -6,7 +6,7 @@ using DistributedSystemsPatterns.UniqueConstraints.Service.Users.Events;
 namespace DistributedSystemsPatterns.UniqueConstraints.Service.Users.Projections;
 
 [SubscriberName("UsersProjection")]
-[Subscription("$ce-users")]
+[Subscription("$ce-uniqueconstraints.users")]
 public class UsersProjection : SubscriberBase
 {
   private readonly MongoUsersRepository _usersRepository;
@@ -15,11 +15,11 @@ public class UsersProjection : SubscriberBase
   {
     _usersRepository = usersRepository;
 
-    When<UserAdded>(AddUser);
-    When<UserDeactivated>(DeactivateUser);
+    When<UserAdded>(Handle);
+    When<UserDeactivated>(Handle);
   }
 
-  private async Task AddUser(UserAdded @event, EventMetadata metadata)
+  private async Task Handle(UserAdded @event, EventMetadata metadata)
   {
     var user = await _usersRepository.GetUser(@event.UserId);
 
@@ -32,11 +32,11 @@ public class UsersProjection : SubscriberBase
       new User(@event.UserId, UserStatus.Active, @event.Name, @event.EmailAddress, metadata.Timestamp, 0));
   }
 
-  private async Task DeactivateUser(UserDeactivated @event, EventMetadata metadata)
+  private async Task Handle(UserDeactivated @event, EventMetadata metadata)
   {
     var user = await _usersRepository.GetUser(@event.UserId);
 
-    if (user == null || !TryUpdateVersion(user, metadata.StreamPosition, out user))
+    if (user is null || !TryUpdateVersion(user, metadata.StreamPosition, out user))
     {
       return;
     }

@@ -10,47 +10,47 @@ namespace DistributedSystemsPatterns.SingleCurrentAggregate.UnitTests;
 public class BillingPeriodTests : AggregateTests<BillingPeriod>
 {
   [Fact]
-  public void When_Starting_A_BillingPeriod__Then_It_Should_Be_Started()
+  public void When_Opening_A_BillingPeriod__Then_It_Should_Be_Opened()
   {
     var userId = HashId.NewHashId();
 
-    When(aggregate => { aggregate.StartBillingPeriod(userId); });
+    When(aggregate => { aggregate.OpenBillingPeriod(userId); });
 
-    Then(aggregateId => new IEvent[] { new BillingPeriodStarted(aggregateId, userId), });
+    Then(aggregateId => new IEvent[] { new BillingPeriodOpened(aggregateId, userId), });
   }
 
   [Fact]
-  public void Given_A_Started_BillingPeriod__When_Starting_It_Again__Then_It_Should_Throw()
+  public void Given_An_Opened_BillingPeriod__When_Opening_It_Again__Then_It_Should_Throw()
   {
     var userId = HashId.NewHashId();
 
-    Given(aggregateId => new[] { Envelope(new BillingPeriodStarted(aggregateId, userId)), });
+    Given(aggregateId => new[] { Envelope(new BillingPeriodOpened(aggregateId, userId)), });
 
-    When(aggregate => { aggregate.StartBillingPeriod(userId); });
+    When(aggregate => { aggregate.OpenBillingPeriod(userId); });
 
-    ThenThrows<BillingPeriodAlreadyStartedException>();
+    ThenThrows<BillingPeriodAlreadyOpenedException>();
   }
 
   [Fact]
-  public void Given_A_Started_BillingPeriod__When_Ending_It__Then_It_Be_Ended()
+  public void Given_An_Opened_BillingPeriod__When_Closing_It__Then_It_Should_Be_Closed()
   {
     var userId = HashId.NewHashId();
 
-    Given(aggregateId => new[] { Envelope(new BillingPeriodStarted(aggregateId, userId)), });
+    Given(aggregateId => new[] { Envelope(new BillingPeriodOpened(aggregateId, userId)), });
 
-    When(aggregate => { aggregate.EndBillingPeriod(); });
+    When(aggregate => { aggregate.CloseBillingPeriod(); });
 
-    Then(aggregateId => new IEvent[] { new BillingPeriodEnded(aggregateId), });
+    Then(aggregateId => new IEvent[] { new BillingPeriodClosed(aggregateId, userId, 0), });
   }
 
   [Fact]
-  public void Given_A_Started_BillingPeriod__When_Adding_Charges__Then_They_Are_Added()
+  public void Given_An_Opened_BillingPeriod__When_Adding_Charges__Then_They_Are_Added()
   {
     var userId = HashId.NewHashId();
 
     var chargeIds = Enumerable.Range(0, 2).Select(_ => HashId.NewHashId()).ToArray();
 
-    Given(aggregateId => new[] { Envelope(new BillingPeriodStarted(aggregateId, userId)), });
+    Given(aggregateId => new[] { Envelope(new BillingPeriodOpened(aggregateId, userId)), });
 
     When(
       aggregate =>
@@ -64,7 +64,8 @@ public class BillingPeriodTests : AggregateTests<BillingPeriod>
     Then(
       aggregateId => new IEvent[]
       {
-        new ChargeAdded(aggregateId, chargeIds[0], 5, 5), new ChargeAdded(aggregateId, chargeIds[1], 5, 10),
+        new ChargeAdded(aggregateId, userId, chargeIds[0], 5, 5),
+        new ChargeAdded(aggregateId, userId, chargeIds[1], 5, 10),
       });
   }
 
@@ -78,9 +79,9 @@ public class BillingPeriodTests : AggregateTests<BillingPeriod>
     Given(
       aggregateId => new[]
       {
-        Envelope(new BillingPeriodStarted(aggregateId, userId)),
-        Envelope(new ChargeAdded(aggregateId, chargeIds[0], 5, 5)),
-        Envelope(new ChargeAdded(aggregateId, chargeIds[1], 5, 10)),
+        Envelope(new BillingPeriodOpened(aggregateId, userId)),
+        Envelope(new ChargeAdded(aggregateId, userId, chargeIds[0], 5, 5)),
+        Envelope(new ChargeAdded(aggregateId, userId, chargeIds[1], 5, 10)),
       });
 
     When(
@@ -95,19 +96,21 @@ public class BillingPeriodTests : AggregateTests<BillingPeriod>
     Then(
       aggregateId => new IEvent[]
       {
-        new ChargeRemoved(aggregateId, chargeIds[0], 5), new ChargeRemoved(aggregateId, chargeIds[1], 0),
+        new ChargeRemoved(aggregateId, userId, chargeIds[0], 5),
+        new ChargeRemoved(aggregateId, userId, chargeIds[1], 0),
       });
   }
 
   [Fact]
-  public void Given_An_Ended_BillingPeriod__When_Adding_A_Charge__Then_It_Should_Throw()
+  public void Given_A_Closed_BillingPeriod__When_Adding_A_Charge__Then_It_Should_Throw()
   {
     var userId = HashId.NewHashId();
 
     Given(
       aggregateId => new[]
       {
-        Envelope(new BillingPeriodStarted(aggregateId, userId)), Envelope(new BillingPeriodEnded(aggregateId)),
+        Envelope(new BillingPeriodOpened(aggregateId, userId)),
+        Envelope(new BillingPeriodClosed(aggregateId, userId, 0)),
       });
 
     When(aggregate => { aggregate.AddCharge(HashId.NewHashId(), 5); });
@@ -116,7 +119,7 @@ public class BillingPeriodTests : AggregateTests<BillingPeriod>
   }
 
   [Fact]
-  public void Given_An_Ended_BillingPeriod__When_Removing_A_Charge__Then_It_Should_Throw()
+  public void Given_A_Closed_BillingPeriod__When_Removing_A_Charge__Then_It_Should_Throw()
   {
     var userId = HashId.NewHashId();
 
@@ -125,9 +128,9 @@ public class BillingPeriodTests : AggregateTests<BillingPeriod>
     Given(
       aggregateId => new[]
       {
-        Envelope(new BillingPeriodStarted(aggregateId, userId)),
-        Envelope(new ChargeAdded(aggregateId, chargeId, 5, 5)),
-        Envelope(new BillingPeriodEnded(aggregateId)),
+        Envelope(new BillingPeriodOpened(aggregateId, userId)),
+        Envelope(new ChargeAdded(aggregateId, userId, chargeId, 5, 5)),
+        Envelope(new BillingPeriodClosed(aggregateId, userId, 5)),
       });
 
     When(aggregate => { aggregate.RemoveCharge(chargeId); });

@@ -2,22 +2,19 @@ using DistributedSystemsPatterns.Shared.EventStore;
 
 namespace DistributedSystemsPatterns.SingleCurrentAggregate.Service.BillingPeriods.Events;
 
-[Event("DistributedSystemsPatterns.SingleCurrentAggregate.ChargeRemoved.V1")]
-public class ChargeRemoved : IEvent
+[Event("DistributedSystemsPatterns.SingleCurrentAggregate.BillingPeriodClosed.V1")]
+public class BillingPeriodClosed : IEvent
 {
   public string BillingPeriodId { get; }
 
   public string UserId { get; }
 
-  public string ChargeId { get; }
-
   public double TotalAmount { get; }
 
-  public ChargeRemoved(string billingPeriodId, string userId, string chargeId, double totalAmount)
+  public BillingPeriodClosed(string billingPeriodId, string userId, double totalAmount)
   {
     BillingPeriodId = billingPeriodId;
     UserId = userId;
-    ChargeId = chargeId;
     TotalAmount = totalAmount;
   }
 }
