@@ -8,7 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\DistributedSystemsPatterns.Shared.MongoDB\DistributedSystemsPatterns.Shared.MongoDB.csproj" />
+        <ProjectReference Include="..\..\Shared\DistributedSystemsPatterns.Shared.MongoDB\DistributedSystemsPatterns.Shared.MongoDB.csproj" />
+        <ProjectReference Include="..\DistributedSystemsPatterns.SingleCurrentAggregate.Data\DistributedSystemsPatterns.SingleCurrentAggregate.Data.csproj" />
     </ItemGroup>
 
 </Project>

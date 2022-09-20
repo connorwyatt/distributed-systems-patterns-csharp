@@ -13,9 +13,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\DistributedSystemsPatterns.Shared.EventStore.Subscriptions.MongoDB\DistributedSystemsPatterns.Shared.EventStore.Subscriptions.MongoDB.csproj" />
-        <ProjectReference Include="..\DistributedSystemsPatterns.Shared.EventStore\DistributedSystemsPatterns.Shared.EventStore.csproj" />
-        <ProjectReference Include="..\DistributedSystemsPatterns.Shared.Ids\DistributedSystemsPatterns.Shared.Ids.csproj" />
+        <ProjectReference Include="..\..\Shared\DistributedSystemsPatterns.Shared.EventStore.Subscriptions.MongoDB\DistributedSystemsPatterns.Shared.EventStore.Subscriptions.MongoDB.csproj" />
+        <ProjectReference Include="..\..\Shared\DistributedSystemsPatterns.Shared.EventStore\DistributedSystemsPatterns.Shared.EventStore.csproj" />
+        <ProjectReference Include="..\..\Shared\DistributedSystemsPatterns.Shared.Ids\DistributedSystemsPatterns.Shared.Ids.csproj" />
         <ProjectReference Include="..\DistributedSystemsPatterns.SingleCurrentAggregate.Data.Mongo\DistributedSystemsPatterns.SingleCurrentAggregate.Data.Mongo.csproj" />
         <ProjectReference Include="..\DistributedSystemsPatterns.SingleCurrentAggregate.Data\DistributedSystemsPatterns.SingleCurrentAggregate.Data.csproj" />
     </ItemGroup>
