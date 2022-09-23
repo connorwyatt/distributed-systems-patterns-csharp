@@ -1,4 +1,4 @@
-using DistributedSystemsPatterns.Shared.EventStore;
+using ConnorWyatt.EventSourcing;
 
 namespace DistributedSystemsPatterns.SingleCurrentAggregate.Service.BillingPeriods.Events;
 

@@ -1,4 +1,4 @@
-using DistributedSystemsPatterns.Shared.EventStore.Aggregates;
+using ConnorWyatt.EventSourcing.Aggregates;
 using DistributedSystemsPatterns.UniqueConstraints.Service.Users.Commands;
 using MediatR;
 

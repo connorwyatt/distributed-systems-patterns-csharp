@@ -1,4 +1,4 @@
-using DistributedSystemsPatterns.Shared.EventStore.Aggregates;
+using ConnorWyatt.EventSourcing.Aggregates;
 using DistributedSystemsPatterns.SingleCurrentAggregate.Service.BillingPeriods.Domain.Exceptions;
 using DistributedSystemsPatterns.SingleCurrentAggregate.Service.BillingPeriods.Events;
 

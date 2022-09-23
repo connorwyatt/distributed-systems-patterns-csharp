@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="ConnorWyatt.EventSourcing.TestUtils" Version="0.0.1" />
         <PackageReference Include="FluentAssertions" Version="6.7.0" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
         <PackageReference Include="xunit" Version="2.4.1" />
@@ -16,7 +17,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\Shared\DistributedSystemsPatterns.Shared.Ids\DistributedSystemsPatterns.Shared.Ids.csproj" />
-        <ProjectReference Include="..\..\Shared\DistributedSystemsPatterns.Shared.TestUtils\DistributedSystemsPatterns.Shared.TestUtils.csproj" />
         <ProjectReference Include="..\DistributedSystemsPatterns.SingleCurrentAggregate.Service\DistributedSystemsPatterns.SingleCurrentAggregate.Service.csproj" />
     </ItemGroup>
 

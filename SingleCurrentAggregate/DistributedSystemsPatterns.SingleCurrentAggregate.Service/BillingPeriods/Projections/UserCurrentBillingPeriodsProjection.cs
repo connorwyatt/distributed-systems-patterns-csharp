@@ -1,5 +1,5 @@
-using DistributedSystemsPatterns.Shared.EventStore;
-using DistributedSystemsPatterns.Shared.EventStore.Subscriptions;
+using ConnorWyatt.EventSourcing;
+using ConnorWyatt.EventSourcing.Subscriptions;
 using DistributedSystemsPatterns.SingleCurrentAggregate.Data;
 using DistributedSystemsPatterns.SingleCurrentAggregate.Service.BillingPeriods.Events;
 

@@ -1,4 +1,4 @@
-using DistributedSystemsPatterns.Shared.EventStore.Aggregates;
+using ConnorWyatt.EventSourcing.Aggregates;
 using DistributedSystemsPatterns.UniqueConstraints.Service.Users.Events;
 
 namespace DistributedSystemsPatterns.UniqueConstraints.Service.Users.Domain;

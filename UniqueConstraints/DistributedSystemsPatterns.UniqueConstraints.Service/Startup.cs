@@ -1,6 +1,6 @@
 using System.Reflection;
-using DistributedSystemsPatterns.Shared.EventStore;
-using DistributedSystemsPatterns.Shared.EventStore.Subscriptions;
+using ConnorWyatt.EventSourcing;
+using ConnorWyatt.EventSourcing.Subscriptions;
 using DistributedSystemsPatterns.Shared.EventStore.Subscriptions.MongoDB;
 using DistributedSystemsPatterns.Shared.MongoDB;
 using DistributedSystemsPatterns.UniqueConstraints.Mongo;

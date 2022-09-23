@@ -1,3 +1,4 @@
+using ConnorWyatt.EventSourcing.Subscriptions;
 using MongoDB.Driver;
 using NodaTime;
 

@@ -12,8 +12,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedSystemsPatterns.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedSystemsPatterns.Shared.Serialization", "Shared\DistributedSystemsPatterns.Shared.Serialization\DistributedSystemsPatterns.Shared.Serialization.csproj", "{30AC043B-195A-4986-9BE6-CF24F50B97B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedSystemsPatterns.Shared.EventStore", "Shared\DistributedSystemsPatterns.Shared.EventStore\DistributedSystemsPatterns.Shared.EventStore.csproj", "{84E0732A-7492-48E8-B27B-438E16D9820F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedSystemsPatterns.Shared.EventStore.Subscriptions.MongoDB", "Shared\DistributedSystemsPatterns.Shared.EventStore.Subscriptions.MongoDB\DistributedSystemsPatterns.Shared.EventStore.Subscriptions.MongoDB.csproj", "{494DEFA5-AF6C-4F48-8F73-008F353C53C5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UniqueConstraints", "UniqueConstraints", "{5A76C44E-E9CA-46A1-B2AE-FAD0D92FDAE4}"
@@ -37,8 +35,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedSystemsPatterns.Shared.Ids", "Shared\DistributedSystemsPatterns.Shared.Ids\DistributedSystemsPatterns.Shared.Ids.csproj", "{49648E61-4C69-4176-B0DF-60A9B14BD7D1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedSystemsPatterns.SingleCurrentAggregate.UnitTests", "SingleCurrentAggregate\DistributedSystemsPatterns.SingleCurrentAggregate.UnitTests\DistributedSystemsPatterns.SingleCurrentAggregate.UnitTests.csproj", "{526A5157-26F0-49E1-9645-F41B79753E2A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedSystemsPatterns.Shared.TestUtils", "Shared\DistributedSystemsPatterns.Shared.TestUtils\DistributedSystemsPatterns.Shared.TestUtils.csproj", "{8267BA2D-1EBC-497D-9F4F-33D2BBA8C2DD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedSystemsPatterns.SingleCurrentAggregate.Data.Mongo", "SingleCurrentAggregate\DistributedSystemsPatterns.SingleCurrentAggregate.Data.Mongo\DistributedSystemsPatterns.SingleCurrentAggregate.Data.Mongo.csproj", "{3DED4330-0121-4FFA-B320-5C449051152A}"
 EndProject
@@ -64,10 +60,6 @@ Global
 		{30AC043B-195A-4986-9BE6-CF24F50B97B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30AC043B-195A-4986-9BE6-CF24F50B97B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30AC043B-195A-4986-9BE6-CF24F50B97B1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{84E0732A-7492-48E8-B27B-438E16D9820F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{84E0732A-7492-48E8-B27B-438E16D9820F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{84E0732A-7492-48E8-B27B-438E16D9820F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{84E0732A-7492-48E8-B27B-438E16D9820F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{494DEFA5-AF6C-4F48-8F73-008F353C53C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{494DEFA5-AF6C-4F48-8F73-008F353C53C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{494DEFA5-AF6C-4F48-8F73-008F353C53C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -92,10 +84,6 @@ Global
 		{526A5157-26F0-49E1-9645-F41B79753E2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{526A5157-26F0-49E1-9645-F41B79753E2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{526A5157-26F0-49E1-9645-F41B79753E2A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8267BA2D-1EBC-497D-9F4F-33D2BBA8C2DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8267BA2D-1EBC-497D-9F4F-33D2BBA8C2DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8267BA2D-1EBC-497D-9F4F-33D2BBA8C2DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8267BA2D-1EBC-497D-9F4F-33D2BBA8C2DD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3DED4330-0121-4FFA-B320-5C449051152A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3DED4330-0121-4FFA-B320-5C449051152A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DED4330-0121-4FFA-B320-5C449051152A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -104,7 +92,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{00133E71-88B5-4E1C-AFD0-2F8C2C7FA1EF} = {85C3B804-2C90-455F-90F6-31E16BD215B7}
 		{30AC043B-195A-4986-9BE6-CF24F50B97B1} = {85C3B804-2C90-455F-90F6-31E16BD215B7}
-		{84E0732A-7492-48E8-B27B-438E16D9820F} = {85C3B804-2C90-455F-90F6-31E16BD215B7}
 		{494DEFA5-AF6C-4F48-8F73-008F353C53C5} = {85C3B804-2C90-455F-90F6-31E16BD215B7}
 		{5A76C44E-E9CA-46A1-B2AE-FAD0D92FDAE4} = {04C50F1B-5079-4286-9C40-8BFACBB69C53}
 		{624905D0-11AC-42C2-B176-8CB5789BD39E} = {5A76C44E-E9CA-46A1-B2AE-FAD0D92FDAE4}
@@ -119,7 +106,6 @@ Global
 		{CD586439-DB91-432D-BB81-FB36A3E29FB5} = {CC040133-4E33-43E1-8883-9424B8617AD6}
 		{49648E61-4C69-4176-B0DF-60A9B14BD7D1} = {85C3B804-2C90-455F-90F6-31E16BD215B7}
 		{526A5157-26F0-49E1-9645-F41B79753E2A} = {A839D7D5-B27D-4285-AF98-09755B7743AF}
-		{8267BA2D-1EBC-497D-9F4F-33D2BBA8C2DD} = {85C3B804-2C90-455F-90F6-31E16BD215B7}
 		{3DED4330-0121-4FFA-B320-5C449051152A} = {CC040133-4E33-43E1-8883-9424B8617AD6}
 	EndGlobalSection
 EndGlobal

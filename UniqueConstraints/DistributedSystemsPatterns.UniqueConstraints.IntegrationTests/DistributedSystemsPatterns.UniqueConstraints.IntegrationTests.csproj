@@ -18,6 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\Shared\DistributedSystemsPatterns.Shared.Serialization\DistributedSystemsPatterns.Shared.Serialization.csproj" />
         <ProjectReference Include="..\DistributedSystemsPatterns.UniqueConstraints.Service\DistributedSystemsPatterns.UniqueConstraints.Service.csproj" />
     </ItemGroup>
 

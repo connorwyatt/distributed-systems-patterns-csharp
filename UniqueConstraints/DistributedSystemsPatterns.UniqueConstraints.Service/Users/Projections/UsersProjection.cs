@@ -1,5 +1,5 @@
-using DistributedSystemsPatterns.Shared.EventStore;
-using DistributedSystemsPatterns.Shared.EventStore.Subscriptions;
+using ConnorWyatt.EventSourcing;
+using ConnorWyatt.EventSourcing.Subscriptions;
 using DistributedSystemsPatterns.UniqueConstraints.Mongo;
 using DistributedSystemsPatterns.UniqueConstraints.Service.Users.Events;
 

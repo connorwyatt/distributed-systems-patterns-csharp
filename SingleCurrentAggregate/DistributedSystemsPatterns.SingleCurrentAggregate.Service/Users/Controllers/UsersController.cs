@@ -3,7 +3,7 @@ using DistributedSystemsPatterns.SingleCurrentAggregate.Service.Users.Events;
 using DistributedSystemsPatterns.SingleCurrentAggregate.Service.Users.Models;
 using EventStore.Client;
 using Microsoft.AspNetCore.Mvc;
-using EventStoreClient = DistributedSystemsPatterns.Shared.EventStore.EventStoreClient;
+using EventStoreClient = ConnorWyatt.EventSourcing.EventStoreClient;
 
 namespace DistributedSystemsPatterns.SingleCurrentAggregate.Service.Users.Controllers;
 

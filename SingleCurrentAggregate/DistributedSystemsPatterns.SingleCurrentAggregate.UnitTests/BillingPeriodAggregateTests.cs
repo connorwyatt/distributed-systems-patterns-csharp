@@ -1,13 +1,13 @@
-using DistributedSystemsPatterns.Shared.EventStore;
+using ConnorWyatt.EventSourcing;
+using ConnorWyatt.EventSourcing.TestUtils;
 using DistributedSystemsPatterns.Shared.Ids;
-using DistributedSystemsPatterns.Shared.TestUtils;
 using DistributedSystemsPatterns.SingleCurrentAggregate.Service.BillingPeriods.Domain;
 using DistributedSystemsPatterns.SingleCurrentAggregate.Service.BillingPeriods.Domain.Exceptions;
 using DistributedSystemsPatterns.SingleCurrentAggregate.Service.BillingPeriods.Events;
 
 namespace DistributedSystemsPatterns.SingleCurrentAggregate.UnitTests;
 
-public class BillingPeriodTests : AggregateTests<BillingPeriod>
+public class BillingPeriodTests : AggregateTestsBase<BillingPeriod>
 {
   [Fact]
   public void When_Opening_A_BillingPeriod__Then_It_Should_Be_Opened()
