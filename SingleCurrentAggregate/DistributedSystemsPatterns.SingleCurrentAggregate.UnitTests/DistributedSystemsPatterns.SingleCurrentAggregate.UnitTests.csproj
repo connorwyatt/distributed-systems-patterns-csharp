@@ -16,7 +16,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Shared\DistributedSystemsPatterns.Shared.Ids\DistributedSystemsPatterns.Shared.Ids.csproj" />
         <ProjectReference Include="..\DistributedSystemsPatterns.SingleCurrentAggregate.Service\DistributedSystemsPatterns.SingleCurrentAggregate.Service.csproj" />
     </ItemGroup>
 

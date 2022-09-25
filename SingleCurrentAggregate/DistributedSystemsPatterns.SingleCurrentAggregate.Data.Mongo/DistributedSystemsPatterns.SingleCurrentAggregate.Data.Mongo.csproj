@@ -8,7 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Shared\DistributedSystemsPatterns.Shared.MongoDB\DistributedSystemsPatterns.Shared.MongoDB.csproj" />
+        <PackageReference Include="ConnorWyatt.Mongo" Version="0.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
         <ProjectReference Include="..\DistributedSystemsPatterns.SingleCurrentAggregate.Data\DistributedSystemsPatterns.SingleCurrentAggregate.Data.csproj" />
     </ItemGroup>
 

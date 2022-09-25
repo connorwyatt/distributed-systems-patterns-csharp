@@ -1,8 +1,8 @@
 using System.Reflection;
 using ConnorWyatt.EventSourcing;
 using ConnorWyatt.EventSourcing.Subscriptions;
-using DistributedSystemsPatterns.Shared.EventStore.Subscriptions.MongoDB;
-using DistributedSystemsPatterns.Shared.MongoDB;
+using ConnorWyatt.EventSourcing.Subscriptions.Mongo;
+using ConnorWyatt.Mongo;
 using DistributedSystemsPatterns.SingleCurrentAggregate.Data.Mongo;
 using DistributedSystemsPatterns.SingleCurrentAggregate.Service.BillingPeriods.ProcessManagers;
 using DistributedSystemsPatterns.SingleCurrentAggregate.Service.BillingPeriods.Projections;

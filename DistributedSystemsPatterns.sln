@@ -8,11 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Application
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{85C3B804-2C90-455F-90F6-31E16BD215B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedSystemsPatterns.Shared.MongoDB", "Shared\DistributedSystemsPatterns.Shared.MongoDB\DistributedSystemsPatterns.Shared.MongoDB.csproj", "{00133E71-88B5-4E1C-AFD0-2F8C2C7FA1EF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedSystemsPatterns.Shared.Serialization", "Shared\DistributedSystemsPatterns.Shared.Serialization\DistributedSystemsPatterns.Shared.Serialization.csproj", "{30AC043B-195A-4986-9BE6-CF24F50B97B1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedSystemsPatterns.Shared.EventStore.Subscriptions.MongoDB", "Shared\DistributedSystemsPatterns.Shared.EventStore.Subscriptions.MongoDB\DistributedSystemsPatterns.Shared.EventStore.Subscriptions.MongoDB.csproj", "{494DEFA5-AF6C-4F48-8F73-008F353C53C5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UniqueConstraints", "UniqueConstraints", "{5A76C44E-E9CA-46A1-B2AE-FAD0D92FDAE4}"
 EndProject
@@ -52,18 +48,10 @@ Global
 		{B39F3E5E-C6C8-4E11-8638-DAA9714F3DA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B39F3E5E-C6C8-4E11-8638-DAA9714F3DA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B39F3E5E-C6C8-4E11-8638-DAA9714F3DA9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{00133E71-88B5-4E1C-AFD0-2F8C2C7FA1EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{00133E71-88B5-4E1C-AFD0-2F8C2C7FA1EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{00133E71-88B5-4E1C-AFD0-2F8C2C7FA1EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{00133E71-88B5-4E1C-AFD0-2F8C2C7FA1EF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{30AC043B-195A-4986-9BE6-CF24F50B97B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{30AC043B-195A-4986-9BE6-CF24F50B97B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30AC043B-195A-4986-9BE6-CF24F50B97B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30AC043B-195A-4986-9BE6-CF24F50B97B1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{494DEFA5-AF6C-4F48-8F73-008F353C53C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{494DEFA5-AF6C-4F48-8F73-008F353C53C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{494DEFA5-AF6C-4F48-8F73-008F353C53C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{494DEFA5-AF6C-4F48-8F73-008F353C53C5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{73F085A1-0E69-4D53-99CE-A1EBB6E8878C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{73F085A1-0E69-4D53-99CE-A1EBB6E8878C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73F085A1-0E69-4D53-99CE-A1EBB6E8878C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -90,9 +78,7 @@ Global
 		{3DED4330-0121-4FFA-B320-5C449051152A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{00133E71-88B5-4E1C-AFD0-2F8C2C7FA1EF} = {85C3B804-2C90-455F-90F6-31E16BD215B7}
 		{30AC043B-195A-4986-9BE6-CF24F50B97B1} = {85C3B804-2C90-455F-90F6-31E16BD215B7}
-		{494DEFA5-AF6C-4F48-8F73-008F353C53C5} = {85C3B804-2C90-455F-90F6-31E16BD215B7}
 		{5A76C44E-E9CA-46A1-B2AE-FAD0D92FDAE4} = {04C50F1B-5079-4286-9C40-8BFACBB69C53}
 		{624905D0-11AC-42C2-B176-8CB5789BD39E} = {5A76C44E-E9CA-46A1-B2AE-FAD0D92FDAE4}
 		{F755A922-F22E-441F-AB16-B6F9117C869E} = {624905D0-11AC-42C2-B176-8CB5789BD39E}
