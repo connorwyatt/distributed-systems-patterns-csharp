@@ -34,7 +34,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedSystemsPatterns.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedSystemsPatterns.SingleCurrentAggregate.Data.Mongo", "SingleCurrentAggregate\DistributedSystemsPatterns.SingleCurrentAggregate.Data.Mongo\DistributedSystemsPatterns.SingleCurrentAggregate.Data.Mongo.csproj", "{3DED4330-0121-4FFA-B320-5C449051152A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedSystemsPatterns.SingleCurrentAggregate.IntegrationTests", "DistributedSystemsPatterns.SingleCurrentAggregate.IntegrationTests\DistributedSystemsPatterns.SingleCurrentAggregate.IntegrationTests.csproj", "{AEA66D8F-750B-4BF8-A6CF-5097F6C138F1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedSystemsPatterns.SingleCurrentAggregate.IntegrationTests", "SingleCurrentAggregate\DistributedSystemsPatterns.SingleCurrentAggregate.IntegrationTests\DistributedSystemsPatterns.SingleCurrentAggregate.IntegrationTests.csproj", "{AEA66D8F-750B-4BF8-A6CF-5097F6C138F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

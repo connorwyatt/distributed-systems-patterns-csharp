@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\SingleCurrentAggregate\DistributedSystemsPatterns.SingleCurrentAggregate.Service\DistributedSystemsPatterns.SingleCurrentAggregate.Service.csproj" />
+        <ProjectReference Include="..\DistributedSystemsPatterns.SingleCurrentAggregate.Service\DistributedSystemsPatterns.SingleCurrentAggregate.Service.csproj" />
     </ItemGroup>
 
 </Project>
