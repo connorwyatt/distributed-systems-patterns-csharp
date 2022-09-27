@@ -45,7 +45,6 @@ public class Startup
       .AddMongoRepositories()
       .AddSubscriber<BillingPeriodsProjection>()
       .AddSubscriber<ChargesProjection>()
-      .AddSubscriber<UserCurrentBillingPeriodsProjection>()
       .AddSubscriber<NewBillingPeriodOpenerProcessManager>();
   }
 

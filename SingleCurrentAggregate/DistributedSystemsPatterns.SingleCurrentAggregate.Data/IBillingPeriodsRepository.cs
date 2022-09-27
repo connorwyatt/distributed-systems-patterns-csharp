@@ -6,7 +6,7 @@ public interface IBillingPeriodsRepository
 {
   Task<BillingPeriod?> GetBillingPeriod(string billingPeriodId);
 
-  Task<IList<BillingPeriod>> GetBillingPeriods(BillingPeriodStatus? status = null);
+  Task<IList<BillingPeriod>> GetBillingPeriods(string? userId = null, BillingPeriodStatus? status = null);
 
   Task InsertBillingPeriod(BillingPeriod billingPeriod);
 

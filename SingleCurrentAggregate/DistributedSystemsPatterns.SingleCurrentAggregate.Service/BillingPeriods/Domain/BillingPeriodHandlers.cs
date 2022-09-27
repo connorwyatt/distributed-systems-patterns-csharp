@@ -1,5 +1,6 @@
 using ConnorWyatt.EventSourcing.Aggregates;
 using DistributedSystemsPatterns.SingleCurrentAggregate.Data;
+using DistributedSystemsPatterns.SingleCurrentAggregate.Data.Models;
 using DistributedSystemsPatterns.SingleCurrentAggregate.Service.BillingPeriods.Commands;
 using MediatR;
 
@@ -12,55 +13,50 @@ public class BillingPeriodHandlers
     IRequestHandler<RemoveCharge>
 {
   private readonly AggregateRepository _aggregateRepository;
+  private readonly IBillingPeriodsRepository _billingPeriodsRepository;
   private readonly IChargesRepository _chargesRepository;
-  private readonly IUserCurrentBillingPeriodsRepository _userCurrentBillingPeriodsRepository;
 
   public BillingPeriodHandlers(
     AggregateRepository aggregateRepository,
-    IChargesRepository chargesRepository,
-    IUserCurrentBillingPeriodsRepository userCurrentBillingPeriodsRepository)
+    IBillingPeriodsRepository billingPeriodsRepository,
+    IChargesRepository chargesRepository)
   {
     _aggregateRepository = aggregateRepository;
+    _billingPeriodsRepository = billingPeriodsRepository;
     _chargesRepository = chargesRepository;
-    _userCurrentBillingPeriodsRepository = userCurrentBillingPeriodsRepository;
   }
 
   public async Task<Unit> Handle(OpenBillingPeriod request, CancellationToken cancellationToken)
   {
-    var billingPeriod = await _aggregateRepository.LoadAggregate<BillingPeriod>(request.BillingPeriodId);
+    var aggregate = await _aggregateRepository.LoadAggregate<BillingPeriod>(request.BillingPeriodId);
 
-    billingPeriod.OpenBillingPeriod(request.UserId);
+    aggregate.OpenBillingPeriod(request.UserId);
 
-    await _aggregateRepository.SaveAggregate(billingPeriod);
+    await _aggregateRepository.SaveAggregate(aggregate);
 
     return Unit.Value;
   }
 
   public async Task<Unit> Handle(CloseBillingPeriod request, CancellationToken cancellationToken)
   {
-    var billingPeriod = await _aggregateRepository.LoadAggregate<BillingPeriod>(request.BillingPeriodId);
+    var aggregate = await _aggregateRepository.LoadAggregate<BillingPeriod>(request.BillingPeriodId);
 
-    billingPeriod.CloseBillingPeriod();
+    aggregate.CloseBillingPeriod();
 
-    await _aggregateRepository.SaveAggregate(billingPeriod);
+    await _aggregateRepository.SaveAggregate(aggregate);
 
     return Unit.Value;
   }
 
   public async Task<Unit> Handle(AddCharge request, CancellationToken cancellationToken)
   {
-    var currentBillingPeriodId = await _userCurrentBillingPeriodsRepository.GetUserCurrentBillingPeriod(request.UserId);
+    var billingPeriodId = await GetBillingPeriodId(request.UserId);
 
-    if (currentBillingPeriodId is null)
-    {
-      throw new InvalidOperationException("No current billing period.");
-    }
+    var aggregate = await _aggregateRepository.LoadAggregate<BillingPeriod>(billingPeriodId);
 
-    var billingPeriod = await _aggregateRepository.LoadAggregate<BillingPeriod>(currentBillingPeriodId);
+    aggregate.AddCharge(request.ChargeId, request.Amount);
 
-    billingPeriod.AddCharge(request.ChargeId, request.Amount);
-
-    await _aggregateRepository.SaveAggregate(billingPeriod);
+    await _aggregateRepository.SaveAggregate(aggregate);
 
     return Unit.Value;
   }
@@ -74,12 +70,27 @@ public class BillingPeriodHandlers
       throw new InvalidOperationException("Charge could not be found.");
     }
 
-    var billingPeriod = await _aggregateRepository.LoadAggregate<BillingPeriod>(charge.BillingPeriodId);
+    var aggregate = await _aggregateRepository.LoadAggregate<BillingPeriod>(charge.BillingPeriodId);
 
-    billingPeriod.RemoveCharge(request.ChargeId);
+    aggregate.RemoveCharge(request.ChargeId);
 
-    await _aggregateRepository.SaveAggregate(billingPeriod);
+    await _aggregateRepository.SaveAggregate(aggregate);
 
     return Unit.Value;
+  }
+
+  private async Task<string> GetBillingPeriodId(string userId)
+  {
+    var billingPeriods =
+      await _billingPeriodsRepository.GetBillingPeriods(
+        userId,
+        BillingPeriodStatus.Open);
+
+    return billingPeriods.Count switch
+    {
+      > 1 => throw new InvalidOperationException("Multiple open billing periods."),
+      < 1 => throw new InvalidOperationException("No open billing periods."),
+      _ => billingPeriods.Single().BillingPeriodId,
+    };
   }
 }

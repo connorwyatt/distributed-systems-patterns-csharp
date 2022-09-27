@@ -20,13 +20,16 @@ public class MongoBillingPeriodsRepository : IBillingPeriodsRepository
     return billingPeriod is not null ? BillingPeriodMapper.ToDataModel(billingPeriod) : null;
   }
 
-  public async Task<IList<Data.Models.BillingPeriod>> GetBillingPeriods(BillingPeriodStatus? status = null)
+  public async Task<IList<Data.Models.BillingPeriod>> GetBillingPeriods(
+    string? userId = null,
+    BillingPeriodStatus? status = null)
   {
     Models.BillingPeriodStatus? mappedStatus =
       status.HasValue ? BillingPeriodStatusMapper.FromDataModel(status.Value) : null;
 
     var filterDefinitions = new FilterDefinition<BillingPeriod>?[]
       {
+        !string.IsNullOrEmpty(userId) ? new ExpressionFilterDefinition<BillingPeriod>(bp => bp.UserId == userId) : null,
         mappedStatus.HasValue
           ? new ExpressionFilterDefinition<BillingPeriod>(bp => bp.Status == mappedStatus.Value)
           : null,

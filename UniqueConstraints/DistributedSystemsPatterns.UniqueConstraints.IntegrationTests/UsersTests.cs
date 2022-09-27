@@ -8,16 +8,11 @@ using FluentAssertions.Execution;
 using Microsoft.AspNetCore.Mvc.Testing;
 using NodaTime;
 using Polly;
-using Polly.Retry;
 
 namespace DistributedSystemsPatterns.UniqueConstraints.IntegrationTests;
 
 public class UsersTests : IClassFixture<WebApplicationFactory<Startup>>
 {
-  private static readonly AsyncRetryPolicy<HttpResponseMessage> RetryPolicy =
-    Policy.HandleResult<HttpResponseMessage>(httpResponseMessage => !httpResponseMessage.IsSuccessStatusCode)
-      .WaitAndRetryAsync(50, _ => TimeSpan.FromMilliseconds(100));
-
   private readonly HttpClient _client;
 
   public UsersTests(WebApplicationFactory<Startup> factory) => _client = factory.CreateClient();
@@ -56,11 +51,8 @@ public class UsersTests : IClassFixture<WebApplicationFactory<Startup>>
     var firstUserId = await AddUser(userDefinition);
     var secondUserId = await AddUser(userDefinition);
 
-    var deactivatedUserRetryPolicy = Policy.HandleResult<User>(user => user.Status == UserStatus.Deactivated)
-      .WaitAndRetryAsync(50, _ => TimeSpan.FromMilliseconds(100));
-
     var firstUser = await GetUser(firstUserId);
-    var secondUser = await deactivatedUserRetryPolicy.ExecuteAsync(() => GetUser(secondUserId));
+    var secondUser = await RetryUntil(() => GetUser(secondUserId), user => user.Status == UserStatus.Deactivated);
 
     using (new AssertionScope())
     {
@@ -71,8 +63,9 @@ public class UsersTests : IClassFixture<WebApplicationFactory<Startup>>
 
   private async Task<User> GetUser(string userId)
   {
-    var getResponseMessage =
-      await RetryPolicy.ExecuteAsync(() => _client.GetAsync($"users/{userId}"));
+    var getResponseMessage = await RetryUntil(
+      () => _client.GetAsync($"users/{userId}"),
+      httpResponseMessage => httpResponseMessage.IsSuccessStatusCode);
 
     return await getResponseMessage.EnsureSuccessStatusCode()
         .Content.ReadFromJsonAsync<User>(DefaultJsonSerializerOptions.Options) ??
@@ -90,8 +83,13 @@ public class UsersTests : IClassFixture<WebApplicationFactory<Startup>>
 
     var reference =
       await postResponseMessage.Content.ReadFromJsonAsync<UserReference>(DefaultJsonSerializerOptions.Options) ??
-      throw new InvalidOperationException("Could not deserialize to Reference.");
+      throw new InvalidOperationException("Could not deserialize to UserReference.");
 
     return reference.UserId;
   }
+
+  private static async Task<T> RetryUntil<T>(Func<Task<T>> action, Func<T, bool> retryUntilPredicate) =>
+    await Policy.HandleResult<T>(result => !retryUntilPredicate.Invoke(result))
+      .WaitAndRetryAsync(50, _ => TimeSpan.FromMilliseconds(100))
+      .ExecuteAsync(action);
 }

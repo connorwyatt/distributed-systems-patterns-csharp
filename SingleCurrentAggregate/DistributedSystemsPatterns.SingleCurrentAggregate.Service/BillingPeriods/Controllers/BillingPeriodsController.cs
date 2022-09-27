@@ -21,11 +21,29 @@ public class BillingPeriodsController : ControllerBase
   }
 
   [HttpGet]
+  [Route("{billingPeriodId}")]
+  public async Task<IActionResult> GetBillingPeriod([FromRoute] string billingPeriodId)
+  {
+    var billingPeriod = await _billingPeriodsRepository.GetBillingPeriod(billingPeriodId);
+
+    if (billingPeriod is null)
+    {
+      return NotFound();
+    }
+
+    return Ok(BillingPeriodMapper.ToApiModel(billingPeriod));
+  }
+
+  [HttpGet]
   [Route("")]
-  public async Task<IActionResult> GetBillingPeriods([FromQuery] BillingPeriodStatus? status = null)
+  public async Task<IActionResult> GetBillingPeriods(
+    [FromQuery] string? userId,
+    [FromQuery]
+    BillingPeriodStatus? status)
   {
     var billingPeriods =
       await _billingPeriodsRepository.GetBillingPeriods(
+        userId,
         status.HasValue ? BillingPeriodStatusMapper.FromApiModel(status.Value) : null);
 
     return Ok(billingPeriods.Select(BillingPeriodMapper.ToApiModel));

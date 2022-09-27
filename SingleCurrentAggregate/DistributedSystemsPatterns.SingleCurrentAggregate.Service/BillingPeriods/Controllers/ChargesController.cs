@@ -50,14 +50,14 @@ public class ChargesController : ControllerBase
   {
     var chargeId = HashId.NewHashId();
 
-    await _mediator.Send(new AddCharge(chargeId, definition.UserId, definition.Amount));
+    await _mediator.Send(new AddCharge(chargeId, definition.UserId, definition.Amount, definition.Timestamp));
 
     return Accepted(new ChargeReference(chargeId));
   }
 
   [HttpPost]
   [Route("{chargeId}/actions/remove")]
-  public async Task<IActionResult> GetBillingPeriods([FromRoute] string chargeId)
+  public async Task<IActionResult> RemoveCharge([FromRoute] string chargeId)
   {
     var charge = await _chargesRepository.GetCharge(chargeId);
 
