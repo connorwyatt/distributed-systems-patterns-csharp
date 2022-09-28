@@ -60,6 +60,13 @@ public class CryptoService
     return Encoding.UTF8.GetString(valueBytes);
   }
 
+  public async Task Redact(string encryptedData)
+  {
+    var (_, cryptoKeyId) = ParseEncryptedValueString(encryptedData);
+
+    await _cryptoKeysRepository.DeleteCryptoKey(cryptoKeyId);
+  }
+
   private static Aes CreateAes(byte[]? key = null)
   {
     var aes = Aes.Create();

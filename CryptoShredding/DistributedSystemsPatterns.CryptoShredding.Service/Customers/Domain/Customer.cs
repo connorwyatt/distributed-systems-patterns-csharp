@@ -7,6 +7,8 @@ namespace DistributedSystemsPatterns.CryptoShredding.Service.Customers.Domain;
 [Category("cryptoshredding.customers")]
 public class Customer : Aggregate
 {
+  public IList<string> SensitivePersonalInformation = new List<string>();
+
   private bool _added;
 
   public Customer()
@@ -27,5 +29,6 @@ public class Customer : Aggregate
   private void Apply(CustomerAdded @event)
   {
     _added = true;
+    SensitivePersonalInformation.Add(@event.SensitivePersonalInformation);
   }
 }

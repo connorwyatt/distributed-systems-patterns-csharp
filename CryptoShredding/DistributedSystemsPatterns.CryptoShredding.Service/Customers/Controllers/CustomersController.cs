@@ -62,4 +62,20 @@ public class CustomersController : ControllerBase
 
     return Accepted(new CustomerReference(customerId));
   }
+
+  [HttpPost]
+  [Route("{customerId}/actions/redact")]
+  public async Task<IActionResult> RedactCustomerSensitivePersonalInformation([FromRoute] string customerId)
+  {
+    var customer = await _customersRepository.GetCustomer(customerId);
+
+    if (customer is null)
+    {
+      return NotFound();
+    }
+
+    await _mediator.Send(new RedactCustomerSensitivePersonalInformation(customerId));
+
+    return Accepted();
+  }
 }

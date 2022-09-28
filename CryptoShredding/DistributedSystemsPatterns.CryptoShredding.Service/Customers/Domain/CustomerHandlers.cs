@@ -5,7 +5,8 @@ using MediatR;
 
 namespace DistributedSystemsPatterns.CryptoShredding.Service.Customers.Domain;
 
-public class CustomerHandlers : IRequestHandler<AddCustomer>
+public class CustomerHandlers
+  : IRequestHandler<AddCustomer>, IRequestHandler<RedactCustomerSensitivePersonalInformation>
 {
   private readonly AggregateRepository _aggregateRepository;
   private readonly CryptoService _cryptoService;
@@ -25,6 +26,20 @@ public class CustomerHandlers : IRequestHandler<AddCustomer>
     aggregate.AddCustomer(request.Name, hashedSensitivePersonalInformation);
 
     await _aggregateRepository.SaveAggregate(aggregate);
+
+    return Unit.Value;
+  }
+
+  public async Task<Unit> Handle(
+    RedactCustomerSensitivePersonalInformation request,
+    CancellationToken cancellationToken)
+  {
+    var aggregate = await _aggregateRepository.LoadAggregate<Customer>(request.CustomerId);
+
+    foreach (var sensitivePersonalInformation in aggregate.SensitivePersonalInformation)
+    {
+      await _cryptoService.Redact(sensitivePersonalInformation);
+    }
 
     return Unit.Value;
   }

@@ -46,6 +46,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedSystemsPatterns.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedSystemsPatterns.CryptoShredding.Data.Mongo", "CryptoShredding\DistributedSystemsPatterns.CryptoShredding.Data.Mongo\DistributedSystemsPatterns.CryptoShredding.Data.Mongo.csproj", "{5D1F1E7F-3D78-49B5-AC5E-56CDD08DCEEF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{9FAAFC41-D6C8-4AC4-8EA1-3C38BB4119EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedSystemsPatterns.CryptoShredding.IntegrationTests", "CryptoShredding\DistributedSystemsPatterns.CryptoShredding.IntegrationTests\DistributedSystemsPatterns.CryptoShredding.IntegrationTests.csproj", "{F7319476-E3D4-4868-8277-40606D86E2E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +108,10 @@ Global
 		{5D1F1E7F-3D78-49B5-AC5E-56CDD08DCEEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D1F1E7F-3D78-49B5-AC5E-56CDD08DCEEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D1F1E7F-3D78-49B5-AC5E-56CDD08DCEEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7319476-E3D4-4868-8277-40606D86E2E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7319476-E3D4-4868-8277-40606D86E2E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7319476-E3D4-4868-8277-40606D86E2E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7319476-E3D4-4868-8277-40606D86E2E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{30AC043B-195A-4986-9BE6-CF24F50B97B1} = {85C3B804-2C90-455F-90F6-31E16BD215B7}
@@ -127,5 +135,7 @@ Global
 		{4D79CF4E-33F8-40AC-94B2-32B01EF15487} = {984B2C53-F78B-4B87-A12B-1D5D8C250C0C}
 		{F060F84B-8AA0-4EED-8724-90FBF98BFAA5} = {984B2C53-F78B-4B87-A12B-1D5D8C250C0C}
 		{5D1F1E7F-3D78-49B5-AC5E-56CDD08DCEEF} = {984B2C53-F78B-4B87-A12B-1D5D8C250C0C}
+		{9FAAFC41-D6C8-4AC4-8EA1-3C38BB4119EB} = {88A19453-BE7C-4692-BCDB-0366EFA388E8}
+		{F7319476-E3D4-4868-8277-40606D86E2E5} = {9FAAFC41-D6C8-4AC4-8EA1-3C38BB4119EB}
 	EndGlobalSection
 EndGlobal
