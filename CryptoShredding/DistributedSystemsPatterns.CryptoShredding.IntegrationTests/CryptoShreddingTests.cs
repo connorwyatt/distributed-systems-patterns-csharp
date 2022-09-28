@@ -26,7 +26,7 @@ public class CryptoShreddingTests : IClassFixture<WebApplicationFactory<Startup>
 
   [Fact]
   public async Task
-    Given_A_Customer__When_Redacting_The_Sensitive_Personal_Information__Then_The_Sensitive_Personal_Data_Is_Redacted()
+    Given_A_Customer__When_Redacting_The_Sensitive_Personal_Information__Then_The_Sensitive_Personal_Information_Is_Redacted()
   {
     var customerId = await AddCustomer("Joe Bloggs", "Confidential information");
 
