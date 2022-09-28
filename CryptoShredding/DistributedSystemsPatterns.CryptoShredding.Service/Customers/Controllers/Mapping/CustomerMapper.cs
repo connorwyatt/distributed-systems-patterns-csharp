@@ -5,9 +5,9 @@ namespace DistributedSystemsPatterns.CryptoShredding.Service.Customers.Controlle
 
 public static class CustomerMapper
 {
-  public static async Task<Customer> ToApiModel(Data.Models.Customer charge, CryptoService cryptoService) =>
+  public static async Task<Customer> ToApiModel(Data.Models.Customer customer, CryptoService cryptoService) =>
     new(
-      charge.CustomerId,
-      charge.Name,
-      await cryptoService.Decrypt(charge.SensitivePersonalInformation));
+      customer.CustomerId,
+      customer.Name,
+      await cryptoService.Decrypt(customer.CustomerId, customer.SensitivePersonalInformation));
 }

@@ -3,7 +3,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using DistributedSystemsPatterns.CryptoShredding.Data;
 using DistributedSystemsPatterns.CryptoShredding.Data.Models;
-using DistributedSystemsPatterns.Shared.Ids;
 
 namespace DistributedSystemsPatterns.CryptoShredding.Service.Crypto;
 
@@ -11,23 +10,21 @@ public class CryptoService
 {
   private static readonly byte[] IV = { 53, 213, 50, 215, 13, 98, 130, 229, 126, 2, 105, 33, 201, 111, 157, 136, };
 
-  private const string StringSeparator = "::";
   private const string DefaultValue = "<REDACTED>";
 
-  private static readonly Regex EncryptedDataRegex =
-    new($"^EncryptedData<(.+){StringSeparator}(.+)>$");
+  private static readonly Regex EncryptedDataRegex = new("^EncryptedData<(.+)>$");
 
   private readonly ICryptoKeysRepository _cryptoKeysRepository;
 
   public CryptoService(ICryptoKeysRepository cryptoKeysRepository) => _cryptoKeysRepository = cryptoKeysRepository;
 
-  public async Task<string> Encrypt(string value)
+  public async Task<string> Encrypt(string cryptoKeyId, string value)
   {
     var valueBytes = Encoding.UTF8.GetBytes(value);
 
     using var aes = CreateAes();
 
-    var cryptoKey = await StoreCryptoKey(aes.Key);
+    await StoreCryptoKey(cryptoKeyId, aes.Key);
 
     using var cryptoTransform = aes.CreateEncryptor();
 
@@ -35,12 +32,12 @@ public class CryptoService
 
     var encryptedValue = Convert.ToBase64String(encryptedValueBytes);
 
-    return CreateString(encryptedValue, cryptoKey);
+    return CreateEncryptedDataString(encryptedValue);
   }
 
-  public async Task<string> Decrypt(string encryptedData)
+  public async Task<string> Decrypt(string cryptoKeyId, string encryptedData)
   {
-    var (encryptedValue, cryptoKeyId) = ParseEncryptedValueString(encryptedData);
+    var encryptedValue = ParseEncryptedDataString(encryptedData);
 
     var cryptoKey = await _cryptoKeysRepository.GetCryptoKey(cryptoKeyId);
 
@@ -60,10 +57,8 @@ public class CryptoService
     return Encoding.UTF8.GetString(valueBytes);
   }
 
-  public async Task Redact(string encryptedData)
+  public async Task Redact(string cryptoKeyId)
   {
-    var (_, cryptoKeyId) = ParseEncryptedValueString(encryptedData);
-
     await _cryptoKeysRepository.DeleteCryptoKey(cryptoKeyId);
   }
 
@@ -86,7 +81,18 @@ public class CryptoService
     return aes;
   }
 
-  private (string encryptedValue, string cryptoKeyId) ParseEncryptedValueString(string encryptedValue)
+  private async Task StoreCryptoKey(string cryptoKeyId, byte[] key)
+  {
+    var keyString = Convert.ToBase64String(key);
+
+    var cryptoKey = new CryptoKey(cryptoKeyId, keyString);
+
+    await _cryptoKeysRepository.InsertCryptoKey(cryptoKey);
+  }
+
+  private static string CreateEncryptedDataString(string encryptedValue) => $"EncryptedData<{encryptedValue}>";
+
+  private static string ParseEncryptedDataString(string encryptedValue)
   {
     var match = EncryptedDataRegex.Match(encryptedValue);
 
@@ -95,20 +101,6 @@ public class CryptoService
       throw new InvalidOperationException("Could not parse encrypted value.");
     }
 
-    return (match.Groups[1].Value, match.Groups[2].Value);
+    return match.Groups[1].Value;
   }
-
-  private async Task<CryptoKey> StoreCryptoKey(byte[] key)
-  {
-    var keyString = Convert.ToBase64String(key);
-
-    var cryptoKey = new CryptoKey(HashId.NewHashId(), keyString);
-
-    await _cryptoKeysRepository.InsertCryptoKey(cryptoKey);
-
-    return cryptoKey;
-  }
-
-  private static string CreateString(string encryptedValue, CryptoKey cryptoKey) =>
-    $"EncryptedData<{encryptedValue}{StringSeparator}{cryptoKey.CryptoKeyId}>";
 }

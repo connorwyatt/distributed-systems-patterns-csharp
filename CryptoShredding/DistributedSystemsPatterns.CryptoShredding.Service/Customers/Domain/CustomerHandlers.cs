@@ -19,7 +19,9 @@ public class CustomerHandlers
 
   public async Task<Unit> Handle(AddCustomer request, CancellationToken cancellationToken)
   {
-    var hashedSensitivePersonalInformation = await _cryptoService.Encrypt(request.SensitivePersonalInformation);
+    var hashedSensitivePersonalInformation = await _cryptoService.Encrypt(
+      request.CustomerId,
+      request.SensitivePersonalInformation);
 
     var aggregate = await _aggregateRepository.LoadAggregate<Customer>(request.CustomerId);
 
@@ -34,12 +36,7 @@ public class CustomerHandlers
     RedactCustomerSensitivePersonalInformation request,
     CancellationToken cancellationToken)
   {
-    var aggregate = await _aggregateRepository.LoadAggregate<Customer>(request.CustomerId);
-
-    foreach (var sensitivePersonalInformation in aggregate.SensitivePersonalInformation)
-    {
-      await _cryptoService.Redact(sensitivePersonalInformation);
-    }
+    await _cryptoService.Redact(request.CustomerId);
 
     return Unit.Value;
   }
